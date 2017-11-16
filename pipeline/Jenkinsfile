@@ -13,5 +13,6 @@ node {
 
   stage 'deploy app'
   openshiftDeploy(namespace: 'demo', deploymentConfig: 'welcome')
-  openshiftDeleteResourceByLabels(namespace: 'demo', apiURL: 'https://openshift.default.svc.cluster.local', authToken: '', types: 'route,svc,pod', keys: 'app' , values: 'image-inspector', verbose: 'false')	
+  openshiftDeleteResourceByLabels(namespace: 'demo', apiURL: 'https://openshift.default.svc.cluster.local', authToken: '', types: 'route,svc,pod', keys: 'app' , values: 'image-inspector', verbose: 'false')
+  sh "oc get all -l app=image-inspector" 	
 }
