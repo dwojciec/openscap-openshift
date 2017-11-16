@@ -13,4 +13,5 @@ node {
 
   stage 'deploy app'
   openshiftDeploy(namespace: 'demo', deploymentConfig: 'welcome')
+  openshiftDeleteResourceByLabels(namespace: 'demo', types: 'all', keys: 'app' , values: 'image-inspector')	
 }
