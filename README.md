@@ -19,6 +19,29 @@ oc secrets new-dockercfg docker-registry \
     --docker-password=$(oc whoami -t) --docker-email=<email-address>
 ```
 
+Note: I used a ServiceAccount due to the unlimited expiration time of the token. (see https://docs.openshift.com/container-platform/3.5/dev_guide/service_accounts.html#dev-managing-service-accounts)
+
+```
+$ oc project demo
+$ oc create sa user-root
+$ oadm policy add-cluster-role-to-user cluster-admin system:serviceaccount:demo:user-root
+$ oc describe sa user-root
+$ oc get secrets | grep user-root
+user-root-dockercfg-1zm3z   kubernetes.io/dockercfg               1         14m
+user-root-token-d7970       kubernetes.io/service-account-token   4         14m
+user-root-token-qzpkc       kubernetes.io/service-account-token   4         14m
+
+$ oc describe secret user-root-token-d7970 | grep token:
+token:		eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZW1vIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InVzZXItcm9vdC10b2tlbi1kNzk3MCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJ1c2VyLXJvb3QiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJmMjlmODhiYy1jYjcyLTExZTctYWZlNC01MjU0MDAwNDMzMDEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVtbzp1c2VyLXJvb3QifQ.SaCotn3I6fY5mRyWgtVGGqazOPVgc1wsQR703An68_YM4t8mIz58Klv1tmXUU_fFKboyQGzAa9Khe3lspeHE5x24WilD9uHb6mtUjJGStSVNnTEEnFkCduVwJYHnROpjQKTYL9pQxveuWhIKsWo3OIIS9EjijFQjpK0w0Nv890KFvItjB_qHFlvQrJ3Kq2yg4iGG-lSmNo7l1ph88_J49PbUIjfJ95uwhSAMDQpqWgOw2_mq-mEd5fAa5AgNPRfhVosoCI_We69yTc4hUW-RFTYXglTYwsw8NrxJCEx-Lp3iLxR_SZEy-9cUCMpJdhTOWI_9Rav4ZP8Zyd5X5U0Q3Y
+
+$ oc delete secrets docker-registry
+$ oc secrets new-dockercfg docker-registry   \
+  --docker-server=docker-registry-default.apps.dwojciec.com  \
+  --docker-username=user-root \
+  --docker-password=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZW1vIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InVzZXItcm9vdC10b2tlbi1kNzk3MCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJ1c2VyLXJvb3QiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJmMjlmODhiYy1jYjcyLTExZTctYWZlNC01MjU0MDAwNDMzMDEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVtbzp1c2VyLXJvb3QifQ.SaCotn3I6fY5mRyWgtVGGqazOPVgc1wsQR703An68_YM4t8mIz58Klv1tmXUU_fFKboyQGzAa9Khe3lspeHE5x24WilD9uHb6mtUjJGStSVNnTEEnFkCduVwJYHnROpjQKTYL9pQxveuWhIKsWo3OIIS9EjijFQjpK0w0Nv890KFvItjB_qHFlvQrJ3Kq2yg4iGG-lSmNo7l1ph88_J49PbUIjfJ95uwhSAMDQpqWgOw2_mq-mEd5fAa5AgNPRfhVosoCI_We69yTc4hUW-RFTYXglTYwsw8NrxJCEx-Lp3iLxR_SZEy-9cUCMpJdhTOWI_9Rav4ZP8Zyd5X5U0Q3Y \
+  --docker-email=test@test.com
+```
+
 4. Provide the url for the image to scan (eg. `IMAGE_URL=registry.access.redhat.com/rhel7:latest`)
 ```
 oc process -f image-inspector-template.json \
