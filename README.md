@@ -34,6 +34,10 @@ user-root-token-qzpkc       kubernetes.io/service-account-token   4         14m
 $ oc describe secret user-root-token-d7970 | grep token:
 token:		eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZW1vIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6InVzZXItcm9vdC10b2tlbi1kNzk3MCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJ1c2VyLXJvb3QiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC51aWQiOiJmMjlmODhiYy1jYjcyLTExZTctYWZlNC01MjU0MDAwNDMzMDEiLCJzdWIiOiJzeXN0ZW06c2VydmljZWFjY291bnQ6ZGVtbzp1c2VyLXJvb3QifQ.SaCotn3I6fY5mRyWgtVGGqazOPVgc1wsQR703An68_YM4t8mIz58Klv1tmXUU_fFKboyQGzAa9Khe3lspeHE5x24WilD9uHb6mtUjJGStSVNnTEEnFkCduVwJYHnROpjQKTYL9pQxveuWhIKsWo3OIIS9EjijFQjpK0w0Nv890KFvItjB_qHFlvQrJ3Kq2yg4iGG-lSmNo7l1ph88_J49PbUIjfJ95uwhSAMDQpqWgOw2_mq-mEd5fAa5AgNPRfhVosoCI_We69yTc4hUW-RFTYXglTYwsw8NrxJCEx-Lp3iLxR_SZEy-9cUCMpJdhTOWI_9Rav4ZP8Zyd5X5U0Q3Y
 
+or 
+
+$ oc get  secret user-root-token-d7970 --template='{{.data.token}}' | base64 --decode
+
 $ oc delete secrets docker-registry
 $ oc secrets new-dockercfg docker-registry   \
   --docker-server=docker-registry-default.apps.dwojciec.com  \
@@ -49,7 +53,7 @@ oc process -f image-inspector-template.json \
     | oc create -f -
 ```
 
-or execute the script `create-objects.sh` to create everything you need.
+or execute the script [create-objects.sh](https://github.com/dwojciec/openscap-openshift/blob/master/create-objects.sh)  to create everything you need. Don't forget to edit it and to change some value like Internal Registry --docker-server.
 
 5. In the case you executed the script, you are going to have Jenkins provisioned in the project, so log into Jenkins and go to Manage Plugins and install the Openshift Client Plugin.
 
@@ -61,6 +65,7 @@ or execute the script `create-objects.sh` to create everything you need.
 ```
 cadaver http://<route url>/api/v1/content/
 ```
+Note: On MAC OSX you can install cadaver using `brew install cadaver`
 
 see a example here
 
