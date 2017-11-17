@@ -27,8 +27,8 @@ node {
                 return (it.object().status.phase == "Running")
               }
 	      }
-	def pod-inspect  =     objects.related( 'pods' )
-	    echo "pod-inspect : ${pod-inspect.name}"
+	//def pod-inspect  =  objects.related( 'pods' )
+	//    echo "pod-inspect : ${pod-inspect.name}"
 	    
 	sh "oc logs image-inspector-pod  | grep webdav"     
 	// def pod-inspect  = created.narrow("pod")
