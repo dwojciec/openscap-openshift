@@ -5,17 +5,11 @@ node {
     openshift.withCluster() {
 	def objectModels = openshift.process( "demo//image-inspector-template", "-p", "APPLICATION_NAME=image-inspector", "-p", "IMAGE_URL=docker-registry-default.apps.dwojciec.com/demo/welcome:latest")
         echo "Creating this template will instantiate ${objectModels.size()} objects"
-	     def objects
-                def verb
-                if (!objectsGeneratedFromTemplate) {
-                    verb = "Created"
-                    // Serialize the objects and pass them to the create API.
-                    // We could also pass JSON/YAML directly; openshift.create(readFile('some.json'))
-                    objects = openshift.create(objectModels)
-                } else {
-                    verb = "Found"
-                    objects = templateGeneratedSelector
-                }
+	def objects
+        def verb
+        verb = "Created"
+        objects = openshift.create(objectModels)
+        
         //def objects = openshift.create( objectModels )
         echo "Application created"
 	objects.describe()    
