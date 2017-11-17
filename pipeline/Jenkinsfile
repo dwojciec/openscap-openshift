@@ -23,26 +23,25 @@ node {
 	    
 	    def podinspect  = objects.narrow("pod")
 	    echo "pod-inspect : ${podinspect.name()}"
-	   // timeout(5) {
-	    //objects.related( 'pods' ).untilEach {
-             //   return (it.object().status.phase == "Running")
-             // }
-	     // }
-	//def pod-inspect  =  objects.related( 'pods' )
-	//    echo "pod-inspect : ${pod-inspect.name}"
+	    timeout(5) {
+	    podinspect.related( 'pods' ).untilEach(1) {
+              return (it.object().status.phase == "Running")
+              }
+	     }
+
 	    
-	sh "oc logs image-inspector-pod  | grep webdav"     
-	// def pod-inspect  = created.narrow("pod")
-	// def result = pod-inspect.log('-f')
-	// echo "The logs operation require ${result.actions.size()} oc interactions"
-        // You can even see exactly what oc command was executed.
-        // echo "Logs executed: ${result.actions[0].cmd}"
+	//sh "oc logs image-inspector-pod  | grep webdav"     
+	
+	 def result = podinspect.log('-f')
+	echo "The logs operation require ${result.actions.size()} oc interactions"
+        //You can even see exactly what oc command was executed.
+        echo "Logs executed: ${result.actions[0].cmd}"
 
         // And even obtain the standard output and standard error of the command.
-        // def logsString = result.actions[0].out
-        // def logsErr = result.actions[0].err
-	   // echo "Logs logString: ${logsString}"
-	   // echo "Log Err : ${logErr}"
+         def logsString = result.actions[0].out
+         def logsErr = result.actions[0].err
+	    echo "Logs logString: ${logsString}"
+	   echo "Log Err : ${logErr}"
     
     }
   stage 'review report'
