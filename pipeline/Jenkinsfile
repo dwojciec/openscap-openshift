@@ -29,7 +29,7 @@ node {
               }
 	     }
           echo "On est ici"
-	  def result = podinspect.log()
+	  def result = podinspect.logs()
 	     // Each high-level operation exposes stout/stderr/status of oc actions that composed
                 echo "Result of logs operation:"
                 echo "  status: ${result.status}"
