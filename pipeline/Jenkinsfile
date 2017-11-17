@@ -9,17 +9,17 @@ node {
         echo "Application created"
 	created.describe()    
 	
-	def pod-inspect  = created.narrow("pod")
-	def result = pod-inspect.log('-f')
-	echo "The logs operation require ${result.actions.size()} oc interactions"
+	// def pod-inspect  = created.narrow("pod")
+	// def result = pod-inspect.log('-f')
+	// echo "The logs operation require ${result.actions.size()} oc interactions"
         // You can even see exactly what oc command was executed.
-        echo "Logs executed: ${result.actions[0].cmd}"
+        // echo "Logs executed: ${result.actions[0].cmd}"
 
         // And even obtain the standard output and standard error of the command.
-        def logsString = result.actions[0].out
-        def logsErr = result.actions[0].err
-	    echo "Logs logString: ${logsString}"
-	    echo "Log Err : ${logErr}"
+        // def logsString = result.actions[0].out
+        // def logsErr = result.actions[0].err
+	   // echo "Logs logString: ${logsString}"
+	   // echo "Log Err : ${logErr}"
     
     }
   stage 'review report'
