@@ -21,12 +21,13 @@ node {
                 }
 	    echo "Waiting for Pod running ...."
 	    
-	    // echo "name of pod : ${it.object().name[2]}"
-	    timeout(5) {
-	    objects.related( 'pods' ).untilEach {
-                return (it.object().status.phase == "Running")
-              }
-	      }
+	    def pod-inspect  = objects.narrow("pod")
+	    echo "pod-inspect : ${pod-inspect}"
+	   // timeout(5) {
+	    //objects.related( 'pods' ).untilEach {
+             //   return (it.object().status.phase == "Running")
+             // }
+	     // }
 	//def pod-inspect  =  objects.related( 'pods' )
 	//    echo "pod-inspect : ${pod-inspect.name}"
 	    
