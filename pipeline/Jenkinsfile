@@ -21,11 +21,11 @@ node {
                 }
 	    echo "Waiting for Pod running ...."
 	    
-	    echo "name of pod : ${it.object().name[2]}"
+	    // echo "name of pod : ${it.object().name[2]}"
 	    timeout(5) {
-	    //untilEach(1) {
-            //    return (it.object().status.phase == "Running")
-             // }
+	    objects.untilEach(2) {
+                return (it.object().status.phase == "Running")
+              }
 	      }
 	// def pod-inspect  = created.narrow("pod")
 	// def result = pod-inspect.log('-f')
