@@ -16,8 +16,17 @@ node {
 	 // Create returns a selector which will always select the objects created
                 objects.withEach {
                     // Each loop binds the variable 'it' to a selector which selects a single object
-                    echo "${verb} ${it.name()} from template with labels ${it.object().metadata.labels}"
+                    echo "${verb} ${it.name()} from template with labels ${it.object().metadata.labels} and status ${it.object().status.phase} "
+		     	
                 }
+	    echo "Waiting for Pod running ...."
+	    
+	    echo "name of pod : ${it.object().name[2]}"
+	    timeout(5) {
+	    //untilEach(1) {
+            //    return (it.object().status.phase == "Running")
+             // }
+	      }
 	// def pod-inspect  = created.narrow("pod")
 	// def result = pod-inspect.log('-f')
 	// echo "The logs operation require ${result.actions.size()} oc interactions"
