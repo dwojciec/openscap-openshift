@@ -29,6 +29,13 @@ node {
               }
 	     }
           echo "On est ici"
+	  def result = podinspect.log()
+	     // Each high-level operation exposes stout/stderr/status of oc actions that composed
+                echo "Result of logs operation:"
+                echo "  status: ${result.status}"
+                echo "  stderr: ${result.err}"
+                echo "  number of actions to fulfill: ${result.actions.size()}"
+                echo "  first action executed: ${result.actions[0].cmd}"
 	    
 	//sh "oc logs image-inspector-pod  | grep webdav"     
 	
