@@ -7,8 +7,9 @@ node {
         echo "Creating this template will instantiate ${models.size()} objects"
         def created = openshift.create( models )
         echo "Application created"
+	created.describe()    
 	
-	def pod-inspect  = created.narrow('pod')
+	def pod-inspect  = created.narrow("pod")
 	def result = pod-inspect.log('-f')
 	echo "The logs operation require ${result.actions.size()} oc interactions"
         // You can even see exactly what oc command was executed.
