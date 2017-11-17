@@ -106,4 +106,4 @@ dav:/api/v1/content/>
 * Tools to support Image Signing and Scanning with the OpenShift Container Platform : https://github.com/sabre1041/ocp-image-signing-scanning
 * Image Inspector image : https://access.redhat.com/containers/#/registry.access.redhat.com/openshift3/image-inspector
 * Image Inspector project : https://github.com/openshift/image-inspector
-* Running clamav image scan in OpenShift : https://github.com/openshift/image-inspector/tree/master/examples/openshift/clamav
+* Running [clamav](https://www.clamav.net/) image scan in OpenShift : https://github.com/openshift/image-inspector/tree/master/examples/openshift/clamav
