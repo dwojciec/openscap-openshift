@@ -61,3 +61,37 @@ or execute the script `create-objects.sh` to create everything you need.
 ```
 cadaver http://<route url>/api/v1/content/
 ```
+
+see a example here
+
+```
+$ cadaver http://image-inspector-demo.apps.dwojciec.com/api/v1/content/
+dav:/api/v1/content/> ls
+Listing collection `/api/v1/content/': succeeded.
+Coll:   bin                                16384  Nov 17 10:04
+Coll:   boot                                   6  Nov 17 10:04
+Coll:   dev                                   43  Nov 17 10:04
+Coll:   etc                                 4096  Nov 17 10:04
+Coll:   home                                   6  Nov 17 10:04
+Coll:   lib                                  272  Nov 17 10:04
+Coll:   lib64                              20480  Nov 17 10:04
+Coll:   lost+found                             6  Nov 17 10:04
+Coll:   media                                  6  Nov 17 10:04
+Coll:   mnt                                    6  Nov 17 10:04
+Coll:   opt                                   32  Nov 17 10:04
+Coll:   proc                                   6  Nov 17 10:04
+Coll:   root                                 154  Nov 17 10:04
+Coll:   run                                  172  Nov 17 10:04
+Coll:   sbin                                4096  Nov 17 10:04
+Coll:   srv                                    6  Nov 17 10:04
+Coll:   sys                                    6  Nov 17 10:04
+Coll:   tmp                                  181  Nov 17 10:04
+Coll:   usr                                  155  Nov 17 10:04
+Coll:   var                                  238  Nov 17 10:04
+        .dockerenv                             0  Nov 17 10:04
+        help.1                              7631  Nov 17 10:04
+        results-arf.xml                 21185062  Nov 17 10:04
+        results.html                     1909464  Nov 17 10:04
+dav:/api/v1/content/> 
+
+```
