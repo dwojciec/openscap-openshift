@@ -24,7 +24,7 @@ node {
 	    def podinspect  = objects.narrow("pod")
 	    echo "pod-inspect : ${podinspect.name()}"
 	    timeout(5) {
-	    podinspect.related( 'pods' ).untilEach(1) {
+	    podinspect.untilEach(1) {
               return (it.object().status.phase == "Running")
               }
 	     }
