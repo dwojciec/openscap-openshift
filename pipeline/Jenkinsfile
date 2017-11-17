@@ -22,13 +22,13 @@ node {
 	    echo "Waiting for Pod running ...."
 	    
 	    def podinspect  = objects.narrow("pod")
-	    echo "pod-inspect : ${podinspect.name()}"
 	    timeout(5) {
 	    podinspect.untilEach(1) {
+		echo "wait for Pod ${podinspect.name() running...."    
               return (it.object().status.phase == "Running")
               }
 	     }
-
+          echo "On est ici"
 	    
 	//sh "oc logs image-inspector-pod  | grep webdav"     
 	
