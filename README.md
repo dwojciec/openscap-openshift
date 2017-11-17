@@ -5,6 +5,7 @@ In this demo we are using Host path, they are restricted by default in most SCCs
 1. Using `minishift` or `oc cluster up` login as `system:admin`:
 ```
 oc login -u system:admin
+oc new-project demo
 ```
   
 2. Give grant access to `privileged` SCC:
