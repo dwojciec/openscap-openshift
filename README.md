@@ -96,5 +96,8 @@ dav:/api/v1/content/>
 
 ```
 
-# Reference
-Tools to support Image Signing and Scanning with the OpenShift Container Platform : https://github.com/sabre1041/ocp-image-signing-scanning
+### Reference
+
+* Tools to support Image Signing and Scanning with the OpenShift Container Platform : https://github.com/sabre1041/ocp-image-signing-scanning
+* Image Inspector image : https://access.redhat.com/containers/#/registry.access.redhat.com/openshift3/image-inspector
+* image Inspector project : https://github.com/openshift/image-inspector
